@@ -88,7 +88,7 @@ class Coveralls:
     @staticmethod
     def load_config_from_circle():
         pr = os.environ.get('CI_PULL_REQUEST', '').split('/')[-1] or None
-        return 'circle-ci', os.environ.get('CIRCLE_BUILD_NUM'), pr
+        return 'circle-ci', os.environ.get('CIRCLE_WORKFLOW_ID'), pr
 
     @staticmethod
     def load_config_from_github():
@@ -183,6 +183,7 @@ class Coveralls:
 
     def wear(self, dry_run=False):
         json_string = self.create_report()
+        log.info(json_string)
         if dry_run:
             return {}
 
