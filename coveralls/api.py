@@ -183,7 +183,6 @@ class Coveralls:
 
     def wear(self, dry_run=False):
         json_string = self.create_report()
-        log.info(json_string)
         if dry_run:
             return {}
 
@@ -256,6 +255,9 @@ class Coveralls:
         self._data = {'source_files': self.get_coverage()}
         self._data.update(git_info())
         self._data.update(self.config)
+        
+        print(self.config)
+        
         if extra:
             if 'source_files' in extra:
                 self._data['source_files'].extend(extra['source_files'])
